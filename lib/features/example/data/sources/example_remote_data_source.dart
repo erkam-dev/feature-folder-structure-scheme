@@ -25,7 +25,7 @@ class ExampleRemoteDataSourceImpl implements ExampleRemoteDataSource {
         scheme: "https",
         // host: baseUrl,
         // path: exampleApplicationUrl,
-      ).toFilePath(),
+      ).toString(),
       data: jsonEncode(body),
     );
     if (response.statusCode == 200) {
