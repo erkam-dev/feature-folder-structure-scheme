@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:http/http.dart';
+import 'package:dio/dio.dart';
 
 import '../../../../core/core.dart';
 
@@ -13,7 +13,7 @@ abstract class ExampleRemoteDataSource {
 }
 
 class ExampleRemoteDataSourceImpl implements ExampleRemoteDataSource {
-  final Client client;
+  final Dio client;
 
   ExampleRemoteDataSourceImpl({required this.client});
 
@@ -21,12 +21,13 @@ class ExampleRemoteDataSourceImpl implements ExampleRemoteDataSource {
   Future applyExampleItem(int value) async {
     final body = {"value": value};
     final response = await client.post(
-        Uri(
-          scheme: "https",
-          // host: baseUrl,
-          // path: exampleApplicationUrl,
-        ),
-        body: jsonEncode(body));
+      Uri(
+        scheme: "https",
+        // host: baseUrl,
+        // path: exampleApplicationUrl,
+      ).toFilePath(),
+      data: jsonEncode(body),
+    );
     if (response.statusCode == 200) {
       return response;
     }

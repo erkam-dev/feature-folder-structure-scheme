@@ -1,5 +1,5 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
 
 import '../../../features/example/example.dart';
 import '../injection_container.dart';
@@ -44,8 +44,5 @@ void initExampleFeatures() {
 
   // Data sources
   sl.registerLazySingleton(
-    () => ExampleRemoteDataSourceImpl(
-      client: sl<Client>(),
-    ),
-  );
+      () => ExampleRemoteDataSourceImpl(client: sl<Dio>()));
 }
